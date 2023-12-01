@@ -32,11 +32,11 @@ int main() {
     programs.push_back(&day1_2);
 
     // Day 2
-    // Day2_1 day2_1;
-    // Day2_2 day2_2;
+    Day2_1 day2_1;
+    Day2_2 day2_2;
 
-    // programs.push_back(&day2_1);
-    // programs.push_back(&day2_2);
+    programs.push_back(&day2_1);
+    programs.push_back(&day2_2);
 
     // Main
 

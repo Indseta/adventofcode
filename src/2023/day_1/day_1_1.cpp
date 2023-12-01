@@ -17,17 +17,28 @@ void Day1_1::main() {
 
 void Day1_1::process_lines(const std::vector<std::string> &lines, int &sum) { 
     for (const auto &line : lines) {
-        std::vector<int> numbers;
-        int number;
+        size_t line_length = line.length();
 
-        for (const auto &c : line) {
+        std::string number = "";
+
+        for (int i = 0; i < line_length; ++i) {
+            const auto &c = line[i];
+
             if (isdigit(c)) {
-                number = c - '0';
-
-                numbers.push_back(number);
+                number += c;
+                break;
             }
         }
 
-        sum += std::stoi(std::to_string(numbers.front()) + std::to_string(numbers.back()));
+        for (int i = line_length - 1; i >= 0; --i) {
+            const auto &c = line[i];
+
+            if (isdigit(c)) {
+                number += c;
+                break;
+            }
+        }
+
+        sum += std::stoi(number);
     }
 }

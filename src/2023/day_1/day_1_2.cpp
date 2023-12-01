@@ -35,28 +35,42 @@ void Day1_2::main() {
 
 
 void Day1_2::process_lines(const std::vector<std::string> &lines, int &sum) {
-    size_t line_size;
-    std::vector<int> numbers;
-    std::string str_conc;
-
     for (const auto &line : lines) {
-        line_size = line.size();
+        size_t line_length = line.length();
 
-        numbers = {};
+        std::string number = "";
 
-        for (int i_start = 0; i_start < line_size; ++i_start) {
-            str_conc = "";
+        for (int i_start = 0; i_start < line_length; ++i_start) {
+            std::string str_conc = "";
 
-            for (int i = i_start; i < line_size; ++i) {
+            int max_word_index = std::min(i_start + 5, (int) line_length);
+            for (int i = i_start; i < max_word_index; ++i) {
                 str_conc += line[i];
 
                 if (is_numeric(str_conc)) {
-                    numbers.push_back(numeric_to_int(str_conc));
+                    number += std::to_string(numeric_to_int(str_conc));
+                    goto find_last_digit;
                 }
             }
         }
 
-        sum += std::stoi(std::to_string(numbers.front()) + std::to_string(numbers.back()));
+        find_last_digit:
+        for (int i_start = line_length - 1; i_start >= 0; --i_start) {
+            std::string str_conc = "";
+
+            int max_word_index = std::max(i_start - 4, 0);
+            for (int i = i_start; i >= max_word_index; --i) {
+                str_conc = line[i] + str_conc;
+
+                if (is_numeric(str_conc)) {
+                    number += std::to_string(numeric_to_int(str_conc));
+                    goto calculate_sum;
+                }
+            }
+        }
+
+        calculate_sum:
+        sum += std::stoi(number);
     }
 }
 
