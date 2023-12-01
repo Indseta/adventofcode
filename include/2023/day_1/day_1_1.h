@@ -3,10 +3,9 @@
 
 #include <base/day.h>
 
-#include <ctype.h>
 #include <iostream>
-#include <numeric>
 #include <string>
+#include <thread>
 #include <vector>
 
 
@@ -15,4 +14,7 @@ class Day1_1 : public Day {
         Day1_1();
 
         void main() override;
+
+    private:
+        void process_lines(const std::vector<std::string> &lines, int &sum);
 };

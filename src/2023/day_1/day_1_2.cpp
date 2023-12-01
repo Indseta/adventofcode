@@ -1,25 +1,55 @@
 #include <2023/day_1/day_1_2.h>
 
 
-Day1_2::Day1_2() : Day(2023, 1, 1) {}
+Day1_2::Day1_2() : Day(2023, 1, 2) {}
 
 
 void Day1_2::main() {
-    const auto &lines = get_lines();
+    const auto& lines = get_lines();
 
-    int sum = 0;
+    size_t num_threads = std::thread::hardware_concurrency();
+    std::vector<std::thread> threads(num_threads);
+    std::vector<int> thread_sums(num_threads, 0);
+
+    size_t lines_per_thread = lines.size() / num_threads;
+
+    for (size_t i = 0; i < num_threads; ++i) {
+        size_t start = i * lines_per_thread;
+        size_t end = (i + 1 == num_threads) ? lines.size() : start + lines_per_thread;
+        std::vector<std::string> thread_lines(lines.begin() + start, lines.begin() + end);
+
+        threads[i] = std::thread(&Day1_2::process_lines, this, thread_lines, std::ref(thread_sums[i]));
+    }
+
+    for (auto &thread : threads) {
+        thread.join();
+    }
+
+    int total_sum = 0;
+    for (const auto &sum : thread_sums) {
+        total_sum += sum;
+    }
+
+    std::cout << total_sum << '\n';
+}
+
+
+void Day1_2::process_lines(const std::vector<std::string> &lines, int &sum) {
+    size_t line_size;
+    std::vector<int> numbers;
+    std::string str_conc;
 
     for (const auto &line : lines) {
-        size_t line_size = line.size();
+        line_size = line.size();
 
-        std::vector<int> numbers;
+        numbers = {};
 
         for (int i_start = 0; i_start < line_size; ++i_start) {
-            std::string str_conc;
+            str_conc = "";
 
             for (int i = i_start; i < line_size; ++i) {
-                const auto &c = line[i];
-                str_conc += c;
+                str_conc += line[i];
+
                 if (is_numeric(str_conc)) {
                     numbers.push_back(numeric_to_int(str_conc));
                 }
@@ -28,40 +58,38 @@ void Day1_2::main() {
 
         sum += std::stoi(std::to_string(numbers.front()) + std::to_string(numbers.back()));
     }
-
-    std::cout << sum << '\n';
 }
 
 
-bool Day1_2::is_numeric(std::string str_in) const {
-    if (str_in == "0" || str_in == "zero") {
+bool Day1_2::is_numeric(const std::string &compare_target) const {
+    if (compare_target == "0" || compare_target == "zero") {
         return true;
     }
-    else if (str_in == "1" || str_in == "one") {
+    else if (compare_target == "1" || compare_target == "one") {
         return true;
     }
-    else if (str_in == "2" || str_in == "two") {
+    else if (compare_target == "2" || compare_target == "two") {
         return true;
     }
-    else if (str_in == "3" || str_in == "three") {
+    else if (compare_target == "3" || compare_target == "three") {
         return true;
     }
-    else if (str_in == "4" || str_in == "four") {
+    else if (compare_target == "4" || compare_target == "four") {
         return true;
     }
-    else if (str_in == "5" || str_in == "five") {
+    else if (compare_target == "5" || compare_target == "five") {
         return true;
     }
-    else if (str_in == "6" || str_in == "six") {
+    else if (compare_target == "6" || compare_target == "six") {
         return true;
     }
-    else if (str_in == "7" || str_in == "seven") {
+    else if (compare_target == "7" || compare_target == "seven") {
         return true;
     }
-    else if (str_in == "8" || str_in == "eight") {
+    else if (compare_target == "8" || compare_target == "eight") {
         return true;
     }
-    else if (str_in == "9" || str_in == "nine") {
+    else if (compare_target == "9" || compare_target == "nine") {
         return true;
     }
     else {
@@ -70,39 +98,39 @@ bool Day1_2::is_numeric(std::string str_in) const {
 }
 
 
-int Day1_2::numeric_to_int(std::string str_in) const {
-    if (str_in == "0" || str_in == "zero") {
+int Day1_2::numeric_to_int(const std::string &compare_target) const {
+    if (compare_target == "0" || compare_target == "zero") {
         return 0;
     }
-    else if (str_in == "1" || str_in == "one") {
+    else if (compare_target == "1" || compare_target == "one") {
         return 1;
     }
-    else if (str_in == "2" || str_in == "two") {
+    else if (compare_target == "2" || compare_target == "two") {
         return 2;
     }
-    else if (str_in == "3" || str_in == "three") {
+    else if (compare_target == "3" || compare_target == "three") {
         return 3;
     }
-    else if (str_in == "4" || str_in == "four") {
+    else if (compare_target == "4" || compare_target == "four") {
         return 4;
     }
-    else if (str_in == "5" || str_in == "five") {
+    else if (compare_target == "5" || compare_target == "five") {
         return 5;
     }
-    else if (str_in == "6" || str_in == "six") {
+    else if (compare_target == "6" || compare_target == "six") {
         return 6;
     }
-    else if (str_in == "7" || str_in == "seven") {
+    else if (compare_target == "7" || compare_target == "seven") {
         return 7;
     }
-    else if (str_in == "8" || str_in == "eight") {
+    else if (compare_target == "8" || compare_target == "eight") {
         return 8;
     }
-    else if (str_in == "9" || str_in == "nine") {
+    else if (compare_target == "9" || compare_target == "nine") {
         return 9;
     }
     else {
-        std::cerr << "std::string \"" << str_in << "\" is not numeric" << '\n';
-        return 0;
+        std::cerr << "std::string \"" << compare_target << "\" is not numeric" << '\n';
+        return -1;
     }
 }
