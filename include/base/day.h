@@ -14,6 +14,12 @@ class Day {
 
         virtual void main() = 0;
 
+        const std::string& get_label() const;
+
     protected:
+        const std::vector<std::string>& get_lines() const;
+
+    private:
         std::vector<std::string> lines;
+        std::string label;
 };

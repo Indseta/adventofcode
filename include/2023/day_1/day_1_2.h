@@ -10,9 +10,13 @@
 #include <vector>
 
 
-class Day1_1 : public Day {
+class Day1_2 : public Day {
     public:
-        Day1_1();
+        Day1_2();
 
         void main() override;
+
+    private:
+        bool is_numeric(std::string str_in) const;
+        int numeric_to_int(std::string str_in) const;
 };

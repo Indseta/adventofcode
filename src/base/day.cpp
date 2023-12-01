@@ -2,7 +2,8 @@
 
 
 Day::Day(uint16_t year, uint8_t day_major, uint8_t day_minor) {
-    const char *file_path = std::format("../src/resources/{}/day_{}_{}_input.txt", year, day_major, day_minor).c_str();
+    // Open file
+    const char *file_path = std::format("../src/resources/{}/day_{}_input.txt", year, day_major).c_str();
 
     std::ifstream file;
     file.open(file_path);
@@ -13,4 +14,17 @@ Day::Day(uint16_t year, uint8_t day_major, uint8_t day_minor) {
     }
 
     file.close();
+
+    // Set label
+    label = std::format("{}, day {}.{}", year, day_major, day_minor);
+}
+
+
+const std::vector<std::string>& Day::get_lines() const {
+    return lines;
+}
+
+
+const std::string& Day::get_label() const {
+    return label;
 }
