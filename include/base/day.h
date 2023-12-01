@@ -5,6 +5,7 @@
 #include <fstream>
 #include <cstdint>
 #include <string>
+#include <thread>
 #include <vector>
 
 
@@ -18,6 +19,8 @@ class Day {
 
     protected:
         const std::vector<std::string>& get_lines() const;
+
+        static size_t num_threads;
 
     private:
         std::vector<std::string> lines;

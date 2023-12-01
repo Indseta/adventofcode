@@ -7,7 +7,6 @@ Day1_2::Day1_2() : Day(2023, 1, 2) {}
 void Day1_2::main() {
     const auto& lines = get_lines();
 
-    size_t num_threads = std::thread::hardware_concurrency();
     std::vector<std::thread> threads(num_threads);
     std::vector<int> thread_sums(num_threads, 0);
 
