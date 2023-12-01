@@ -16,7 +16,7 @@ Day::Day(uint16_t year, uint8_t day_major, uint8_t day_minor) {
     file.close();
 
     // Set label
-    label = std::format("{}, day {}.{}", year, day_major, day_minor);
+    label = std::format("Day {}.{}", day_major, day_minor);
 }
 
 
