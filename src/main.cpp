@@ -6,6 +6,9 @@
 #include <2023/day_2/day_2_1.h>
 #include <2023/day_2/day_2_2.h>
 
+#include <2023/day_3/day_3_1.h>
+#include <2023/day_3/day_3_2.h>
+
 #include <chrono>
 #include <cstdint>
 #include <vector>
@@ -26,18 +29,25 @@ int main() {
     std::vector<Day*> programs;
 
     // Day 1
-    Day1_1 day1_1;
-    Day1_2 day1_2;
+    // Day1_1 day1_1;
+    // Day1_2 day1_2;
 
-    programs.push_back(&day1_1);
-    programs.push_back(&day1_2);
+    // programs.push_back(&day1_1);
+    // programs.push_back(&day1_2);
 
     // Day 2
-    Day2_1 day2_1;
-    Day2_2 day2_2;
+    // Day2_1 day2_1;
+    // Day2_2 day2_2;
 
-    programs.push_back(&day2_1);
-    programs.push_back(&day2_2);
+    // programs.push_back(&day2_1);
+    // programs.push_back(&day2_2);
+
+    // Day 3
+    Day3_1 day3_1;
+    Day3_2 day3_2;
+
+    programs.push_back(&day3_1);
+    programs.push_back(&day3_2);
 
     // Main
 
