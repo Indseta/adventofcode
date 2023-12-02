@@ -23,7 +23,7 @@ Day::Day(uint16_t year, uint8_t day_major, uint8_t day_minor) {
 }
 
 
-const std::vector<std::string>& Day::get_lines() const {
+std::vector<std::string>& Day::get_lines() {
     return lines;
 }
 

@@ -7,6 +7,7 @@
 #include <2023/day_2/day_2_2.h>
 
 #include <chrono>
+#include <cstdint>
 #include <vector>
 
 
@@ -41,9 +42,10 @@ int main() {
     // Main
 
     std::chrono::high_resolution_clock::time_point start_time, end_time;
-    std::chrono::duration<double, std::milli> elapsed_time, total_elapsed_time;
+    std::chrono::duration<double, std::milli> elapsed_time;
 
-    total_elapsed_time = std::chrono::milliseconds(0);
+    std::chrono::duration<double, std::milli> total_elapsed_time = std::chrono::milliseconds(0);
+    uint8_t p_iterations = 0;
 
     for (const auto &program : programs) {
         std::cout << '\n';
@@ -57,12 +59,17 @@ int main() {
 
         elapsed_time = end_time - start_time;
         total_elapsed_time += elapsed_time;
+        p_iterations += 1;
 
         std::cout << "Elapsed time: " << elapsed_time.count() << "ms" << '\n';
     }
 
+    const double total_elapsed_time_dbl = total_elapsed_time.count();
+
     std::cout << '\n';
-    std::cout << "Total elapsed time: " << total_elapsed_time.count() << "ms" << "\n";
+    std::cout << "-- Statistics --" << '\n';
+    std::cout << "Total elapsed time: " << total_elapsed_time_dbl << "ms" << "\n";
+    std::cout << "Average elapsed time: " << total_elapsed_time_dbl / p_iterations << "ms" << "\n";
     std::cout << '\n';
 
     return 0;
