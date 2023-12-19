@@ -6,10 +6,10 @@ size_t Day::num_threads = 1; // std::thread::hardware_concurrency()
 
 Day::Day(uint16_t year, uint8_t day_major, uint8_t day_minor) {
     // Open file
-    const char *file_path = ("../src/resources/" + std::to_string(year) + "/day_" + std::to_string(day_major) + "_input.txt").c_str();
+    std::string file_path = ("../src/resources/" + std::to_string(year) + "/day_" + std::to_string(day_major) + "_input.txt");
 
     std::ifstream file;
-    file.open(file_path);
+    file.open(file_path.c_str());
 
     if (!file.is_open()) {
         std::cerr << "Failed to open file " << file_path << '\n';
