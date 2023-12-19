@@ -11,6 +11,10 @@ Day::Day(uint16_t year, uint8_t day_major, uint8_t day_minor) {
     std::ifstream file;
     file.open(file_path);
 
+    if (!file.is_open()) {
+        std::cerr << "Failed to open file " << file_path << '\n';
+    }
+
     std::string line;
     while (std::getline(file, line)) {
         lines.push_back(line);
