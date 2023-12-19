@@ -3,6 +3,7 @@
 
 #include <fstream>
 #include <cstdint>
+#include <iostream>
 #include <string>
 #include <thread>
 #include <vector>

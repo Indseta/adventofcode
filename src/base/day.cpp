@@ -12,7 +12,7 @@ Day::Day(uint16_t year, uint8_t day_major, uint8_t day_minor) {
     file.open(file_path);
 
     if (!file.is_open()) {
-        std::cout << "Failed to open file " << file_path << '\n';
+        std::cerr << "Failed to open file " << file_path << '\n';
     }
 
     std::string line;
